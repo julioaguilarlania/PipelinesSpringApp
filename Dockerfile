@@ -1,7 +1,7 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:21-jdk-alpine
 
 EXPOSE 8080
 
 WORKDIR /app
-COPY taller-*.jar tallerspring.jar
-ENTRYPOINT ["java", "-jar", "tallerspring.jar"]
+COPY taller-*.jar tallerbackend.jar
+ENTRYPOINT ["java", "-jar", "tallerbackend.jar","-Dspring.profiles.active=docker"]
