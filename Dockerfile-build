@@ -1,0 +1,18 @@
+# syntax=docker/dockerfile:1
+FROM maven:3.9-eclipse-temurin-21-alpine AS construccion
+
+RUN mkdir /home/.m2
+WORKDIR /home/build
+COPY pom.xml .
+# Cuando copiamos un directorio completo hay que especificar el directorio como destino
+COPY src src
+USER root
+RUN --mount=type=cache,target=/root/.m2 mvn clean package
+
+FROM eclipse-temurin:21-jdk-alpine AS empaque
+
+EXPOSE 8080
+
+WORKDIR /app
+COPY --from=construccion /home/build/target/*.jar tallerbackend.jar
+ENTRYPOINT ["java", "-jar", "tallerbackend.jar","-Dspring.profiles.active=docker"]
