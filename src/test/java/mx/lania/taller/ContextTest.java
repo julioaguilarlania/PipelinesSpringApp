@@ -12,7 +12,7 @@ import org.springframework.test.annotation.DirtiesContext;
  * @author Jaguilar
  */
 @SpringBootTest
-@DirtiesContext
+@DirtiesContext // Having other test classes next to this one repeats DB populating in the same DB.
 public class ContextTest {
     
     @Autowired
