@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -19,39 +19,39 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @DirtiesContext
 @AutoConfigureMockMvc
-public class VehiculosTest {
-    
+public class ClientesTest {
+
     @Autowired
     private MockMvc mockMvc;
     
     @Test
     void listaVehiculos() throws Exception {
-        mockMvc.perform(get("/vehiculos"))
+        mockMvc.perform(get("/clientes"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(containsString("ACD1245")))
-                .andExpect(content().string(containsString("BCE2545")));
+                .andExpect(content().string(containsString("CLIENTE A")))
+                .andExpect(content().string(containsString("BCDE900202MJCXYZ00")));
+    }
+    
+    @Test
+    void buscarVehiculos() throws Exception {
+        mockMvc.perform(get("/clientes?nombre=b"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("BCDE900202MJCXYZ00")));
     }
 
     @Test
-    void listaVehiculosXML() throws Exception {
-        mockMvc.perform(get("/vehiculos").accept(MediaType.TEXT_XML))
+    void buscarVariosVehiculos() throws Exception {
+        mockMvc.perform(get("/clientes?nombre=cli"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_XML)) // Match no exacto por el charset
-                .andExpect(content().string(containsString("ACD1245")))
-                .andExpect(content().string(containsString("BCE2545")));
+                .andExpect(content().string(containsString("BCDE900202MJCXYZ00")))
+                .andExpect(content().string(containsString("BCDE900202MJCXYZ00")));
     }
-    
+
     @Test
-    void getVehiculoExistente() throws Exception {
-        mockMvc.perform(get("/vehiculos/ABC1234"))
+    void buscarVehiculosNoExistentes() throws Exception {
+        mockMvc.perform(get("/clientes?nombre=QWERTY"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("ACURA")));
-    }
-    
-    @Test
-    void getVehiculoNoExistente() throws Exception {
-        mockMvc.perform(get("/vehiculos/QWR9812"))
-                .andExpect(status().isNotFound());
+                .andExpect(content().string("[]"));
     }
 }

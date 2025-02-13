@@ -35,6 +35,13 @@ public class ControladorClientes {
             return ResponseEntity.notFound().build();
         }
     }
+    
+    @GetMapping(value="clientes", params = {"nombre"})
+    public ResponseEntity<List<Cliente>> buscarPorNombre(
+            @RequestParam("nombre") String cadena
+    ) {
+        return ResponseEntity.ok(repoClientes.findByNombreContainingIgnoreCase(cadena));
+    }
 
     @PostMapping("clientes")
     public ResponseEntity<Cliente> crear(
