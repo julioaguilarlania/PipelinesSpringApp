@@ -2,7 +2,6 @@ package mx.lania.taller.entidades;
 
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vehiculos")
@@ -11,7 +10,7 @@ public class Vehiculo {
     public Vehiculo() {
     }
 
-    public Vehiculo(String placas, String color, String marca, String modelo, Double kilometraje, LocalDateTime fechaIngreso, LocalDateTime fechaSalida) {
+    public Vehiculo(String placas, String color, String marca, String modelo, Double kilometraje) {
         this.placas = placas;
         this.color = color;
         this.marca = marca;
