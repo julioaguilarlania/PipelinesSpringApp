@@ -1,13 +1,7 @@
 package mx.lania.taller.entidades;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalField;
 
 @Entity
 @Table(name = "vehiculos")
@@ -16,7 +10,7 @@ public class Vehiculo {
     public Vehiculo() {
     }
 
-    public Vehiculo(String placas, String color, String marca, String modelo, Double kilometraje, LocalDateTime fechaIngreso, LocalDateTime fechaSalida) {
+    public Vehiculo(String placas, String color, String marca, String modelo, Double kilometraje) {
         this.placas = placas;
         this.color = color;
         this.marca = marca;

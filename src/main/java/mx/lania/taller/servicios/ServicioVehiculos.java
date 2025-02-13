@@ -4,14 +4,12 @@ import mx.lania.taller.entidades.Cliente;
 import mx.lania.taller.entidades.Vehiculo;
 import mx.lania.taller.repositorios.RepositorioClientes;
 import mx.lania.taller.repositorios.RepositorioVehiculos;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-//@Service
-@Component
+@Service
 public class ServicioVehiculos {
 
     RepositorioVehiculos repoVehiculos;
