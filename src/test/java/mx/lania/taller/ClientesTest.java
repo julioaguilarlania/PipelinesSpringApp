@@ -30,7 +30,7 @@ public class ClientesTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(containsString("CLIENTE A")))
-                .andExpect(content().string(containsString("BCDE900202MJCXYZ00")));
+                .andExpect(content().string(containsString("BCDE900202MJCXYZO0")));
     }
     
     @Test
